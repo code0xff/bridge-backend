@@ -1,7 +1,8 @@
 const xchainRepository = require('../repositories/xchain')
 
 const getXchain = async (req, res, next) => {
-  return await xchainRepository.findXchains()
+  const xchains =  await xchainRepository.findXchains()
+  return res.send(xchains)
 }
 
 module.exports = {

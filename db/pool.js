@@ -1,9 +1,9 @@
-const mysql = require('mysql')
+const mysql = require('mysql2/promise')
 
-let pool = mysql.createPool({
+const pool = mysql.createPool({
   host: 'localhost',
   user: 'root',
-  password: 'mariaadmin',
+  password: 'mariadb',
   database: 'xchain',
   connectionLimit: 20
 })
