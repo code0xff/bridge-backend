@@ -3,6 +3,6 @@ const xchainService = require('../services/xchain')
 
 const router = express.Router()
 
-router.get('/', xchainService.getXchain)
+router.get('/from/:from/to/:to', xchainService.getXchain)
 
 module.exports = router
