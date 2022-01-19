@@ -14,7 +14,7 @@ app.use(express.urlencoded({ extended: false }))
 app.use(cookieParser())
 app.use(express.static(path.join(__dirname, 'public')))
 
-app.use('/xchain', xchainRouter)
-app.use('/evaluation', evaluationRouter)
+app.use('/api/xchain', xchainRouter)
+app.use('/api/evaluation', evaluationRouter)
 
 module.exports = app
