@@ -17,9 +17,7 @@ const addXchain = async (req, res, next) => {
 }
 
 const getXchain = async (req, res, next) => {
-  const from = parseInt(req.params.from);
-  const to = parseInt(req.params.to);
-  const xchains =  await xchainRepository.findXchainByFromIdAndToId(from, to)
+  const xchains =  await xchainRepository.findXchain()
   return res.send(xchains)
 }
 

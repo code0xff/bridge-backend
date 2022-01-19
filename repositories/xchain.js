@@ -6,14 +6,14 @@ const createXchain = async (name, enName, image, detail) => {
   values(?, ?, ?, ?, now(), now(), 'admin', 'admin')`, [name, enName, image, detail])
 }
 
-const findXchainByFromIdAndToId = async (from, to) => {
+const findXchain = async (from, to) => {
   const conn = await pool.getConnection(async conn => conn)
-  const rows = await conn.query("select * from xchain.xchain where xchain_id >= ? and xchain_id <= ? order by 1", [from, to])
+  const rows = await conn.query("select * from xchain.xchain order by 1", [])
   console.log(rows[0])
   return rows[0]
 }
 
 module.exports = {
   createXchain,
-  findXchainByFromIdAndToId
+  findXchain
 }
