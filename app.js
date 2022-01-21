@@ -5,6 +5,7 @@ const logger = require('morgan')
 
 const xchainRouter = require('./routes/xchain')
 const evaluationRouter = require('./routes/evaluation')
+const feedbackRouter = require('./routes/feedback')
 
 const app = express()
 
@@ -16,5 +17,6 @@ app.use(express.static(path.join(__dirname, 'public')))
 
 app.use('/api/xchain', xchainRouter)
 app.use('/api/evaluation', evaluationRouter)
+app.use('/api/feedback', feedbackRouter)
 
 module.exports = app

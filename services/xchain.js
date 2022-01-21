@@ -3,12 +3,9 @@ const xchainRepository = require('../repositories/xchain')
 const addXchain = async (req, res, next) => {
   try {
     console.log(req.body)
-    const name = req.body.xchainName
-    const enName = req.body.xchainEnName
-    const image = req.body.xchainImage
-    const detail = req.body.xchainDetail
+    const xchain = req.body.xchain
 
-    await xchainRepository.createXchain(name, enName, image, detail)
+    await xchainRepository.createXchain(xchain)
     return res.send('success to create!')
   } catch (e) {
     console.error(e)
@@ -16,12 +13,30 @@ const addXchain = async (req, res, next) => {
   }
 }
 
-const getXchain = async (req, res, next) => {
-  const xchains =  await xchainRepository.findXchain()
+const getAllXchain = async (req, res, next) => {
+  const xchains =  await xchainRepository.findAllXchain()
   return res.send(xchains)
+}
+
+const getXchain = async (req, res, next) => {
+  try {
+    const xchainId = req.params.id;
+    console.log(xchainId)
+
+    const xchains = await xchainRepository.findXchain(xchainId)
+    if (xchains) {
+      return res.send(xchains[0])
+    } else {
+      return res.status(500).send('xchain does not exist! xchain_id: ' + xchainId)
+    }
+  } catch (e) {
+    console.error(e)
+    return res.status(500).send('failed to get xchain!')
+  }
 }
 
 module.exports = {
   addXchain,
-  getXchain
+  getAllXchain,
+  getXchain,
 }

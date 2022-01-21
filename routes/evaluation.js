@@ -3,7 +3,7 @@ const evaluationService = require('../services/evaluation')
 
 const router = express.Router()
 
-router.post('/', evaluationService.addEvaluation)
+router.post('/', evaluationService.modifyEvaluation)
 router.get('/xchain/:xchainId', evaluationService.getEvaluation)
 
 module.exports = router
