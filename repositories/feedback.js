@@ -4,7 +4,6 @@ const createFeedback = async (feedback) => {
   let conn
   try {
     conn = await pool.getConnection(async conn => conn)
-    console.log(feedback)
     await conn.beginTransaction()
     await conn.query(
       `update xchain.xchain_feedback set fee_sum=fee_sum+?, time_sum=time_sum+?, ui_sum=ui_sum+?, support_sum=support_sum+?, feedback_count=feedback_count+1,

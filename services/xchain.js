@@ -2,7 +2,6 @@ const xchainRepository = require('../repositories/xchain')
 
 const addXchain = async (req, res, next) => {
   try {
-    console.log(req.body)
     const xchain = req.body.xchain
 
     await xchainRepository.createXchain(xchain)
@@ -21,8 +20,6 @@ const getAllXchain = async (req, res, next) => {
 const getXchain = async (req, res, next) => {
   try {
     const xchainId = req.params.id;
-    console.log(xchainId)
-
     const xchains = await xchainRepository.findXchain(xchainId)
     if (xchains) {
       return res.send(xchains[0])

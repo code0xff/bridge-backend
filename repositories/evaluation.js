@@ -1,13 +1,14 @@
 const pool = require('../db/pool')
 
-const updateEvaluation = async (eval) => {
+const updateEvaluation = async (evalution) => {
     let conn
     try {
         conn = await pool.getConnection(async conn => conn)
         await conn.query(
           `update xchain.xchain_eval set dec_score=?, dec_detail=?, per_score=?, per_detail=?, sec_score=?, sec_detail=?, scal_score=?, scal_detail=?,
         updated_at=now(), updated_by='admin' where xchain_id=?`,
-          [eval.decScore, eval.decDetail, eval.perScore, eval.perDetail, eval.secScore, eval.secDetail, eval.scalScore, eval.scalDetail, eval.xchainId])
+          [evalution.decScore, evalution.decDetail, evalution.perScore, evalution.perDetail, evalution.secScore, evalution.secDetail, evalution.scalScore, evalution.scalDetail, evalution.xchainId])
+        conn.commit()
     } catch (e) {
         throw e
     } finally {

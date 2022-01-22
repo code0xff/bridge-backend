@@ -30,7 +30,6 @@ const findAllXchain = async () => {
   try {
     conn = await pool.getConnection(async conn => conn)
     const rows = await conn.query("select * from xchain.xchain order by 1", [])
-    console.log(rows[0])
     conn.release()
     return rows[0]
   } catch (e) {
@@ -45,7 +44,6 @@ const findXchain = async (xchainId) => {
   try {
     conn = await pool.getConnection(async conn => conn)
     const rows = await conn.query("select * from xchain.xchain where xchain_id = ?", [xchainId])
-    console.log(rows[0])
     conn.release()
     return rows[0]
   } catch (e) {

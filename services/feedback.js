@@ -1,7 +1,7 @@
 const feedbackRepository = require('../repositories/feedback')
 
 const addFeedback = async (req, res, next) => {
-  const feedback = req.body.feedback;
+  const feedback = req.body.feedback
   try {
     await feedbackRepository.createFeedback(feedback)
     return res.send('success to add feedback!')

@@ -4,6 +4,6 @@ const evaluationService = require('../services/evaluation')
 const router = express.Router()
 
 router.post('/', evaluationService.modifyEvaluation)
-router.get('/xchain/:xchainId', evaluationService.getEvaluation)
+router.get('/id/:xchainId', evaluationService.getEvaluation)
 
 module.exports = router
