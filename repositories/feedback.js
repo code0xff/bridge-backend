@@ -22,6 +22,36 @@ const createFeedback = async (feedback) => {
   }
 }
 
+const findFeedback = async (id) => {
+  let conn
+  try {
+    conn = await pool.getConnection(async conn => conn)
+
+    const rows = await conn.query(`select * from xchain.xchain_feedback where xchain_id=?`, [id])
+    return rows[0]
+  } catch (e) {
+    throw e
+  } finally {
+    conn.release()
+  }
+}
+
+const findLatestFeedbackDetail = async (id) => {
+  let conn
+  try {
+    conn = await pool.getConnection(async conn => conn)
+
+    const rows = await conn.query(`select * from xchain.xchain_feedback_detail where xchain_id=? order by 1 desc limit 1`, [id])
+    return rows[0]
+  } catch (e) {
+    throw e
+  } finally {
+    conn.release()
+  }
+}
+
 module.exports = {
-  createFeedback
+  createFeedback,
+  findFeedback,
+  findLatestFeedbackDetail,
 }
