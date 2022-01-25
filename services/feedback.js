@@ -29,7 +29,7 @@ const getFeedback = async (req, res, next) => {
         ret['uiAverage'] =  0
         ret['supportAverage'] = 0
       }
-      ret['feedbackCount'] = feedback_count
+      ret['feedbackCount'] = feedback.feedback_count
     }
 
     const feedbackDetails = await feedbackRepository.findLatestFeedbackDetail(id)
@@ -43,7 +43,30 @@ const getFeedback = async (req, res, next) => {
   }
 }
 
+const getFeedbackDetail = async (req, res, next) => {
+  const {id, seq} = req.params
+  try {
+    const firstFeedback = await feedbackRepository.findFirstFeedbackDetail(id)
+    if (firstFeedback.length === 0) {
+      return res.send({isFeedbackEnd: true, feedbacks: []})
+    }
+
+    const feedbacks = await feedbackRepository.findFeedbackDetailFromSeq(id, parseInt(seq))
+    console.log(feedbacks)
+
+    if (feedbacks[feedbacks.length - 1].xchain_feedback_detail_seq === firstFeedback[0].xchain_feedback_detail_seq) {
+      return res.send({isFeedbackEnd: true, feedbacks})
+    } else {
+      return res.send({isFeedbackEnd: false, feedbacks})
+    }
+  } catch (e) {
+    console.error(e)
+    return res.status(500).send('failed to get feedback!')
+  }
+}
+
 module.exports = {
   addFeedback,
   getFeedback,
+  getFeedbackDetail,
 }

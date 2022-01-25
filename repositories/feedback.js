@@ -50,8 +50,43 @@ const findLatestFeedbackDetail = async (id) => {
   }
 }
 
+const findFirstFeedbackDetail = async (id) => {
+  let conn
+  try {
+    conn = await pool.getConnection(async conn => conn)
+
+    const rows = await conn.query(`select * from xchain.xchain_feedback_detail where xchain_id=? order by 1 limit 1`, [id])
+    return rows[0]
+  } catch (e) {
+    throw e
+  } finally {
+    conn.release()
+  }
+}
+
+const findFeedbackDetailFromSeq = async (id, seq) => {
+  let conn
+  try {
+    conn = await pool.getConnection(async conn => conn)
+
+    let rows
+    if (seq === 0) {
+      rows = await conn.query(`select * from xchain.xchain_feedback_detail where xchain_id=? order by 1 desc limit 10`, [id])
+    } else {
+      rows = await conn.query(`select * from xchain.xchain_feedback_detail where xchain_id=? and xchain_feedback_detail_seq < ? order by 10 desc limit 1`, [id, seq])
+    }
+    return rows[0]
+  } catch (e) {
+    throw e
+  } finally {
+    conn.release()
+  }
+}
+
 module.exports = {
   createFeedback,
   findFeedback,
   findLatestFeedbackDetail,
+  findFirstFeedbackDetail,
+  findFeedbackDetailFromSeq,
 }
