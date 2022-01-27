@@ -34,13 +34,14 @@ CREATE TABLE `xchain_eval` (
   `created_by` varchar(100) NOT NULL,
   `updated_by` varchar(100) NOT NULL,
   `xchain_id` varchar(100) NOT NULL,
+  `ref_detail` text DEFAULT NULL,
   PRIMARY KEY (`xchain_eval_seq`),
   KEY `xchain_eval_created_at_IDX` (`created_at`) USING BTREE,
   KEY `xchain_eval_updated_at_IDX` (`updated_at`) USING BTREE,
   KEY `xchain_eval_created_by_IDX` (`created_by`) USING BTREE,
   KEY `xchain_eval_updated_by_IDX` (`updated_by`) USING BTREE,
   KEY `xchain_eval_xchain_id_IDX` (`xchain_id`) USING BTREE
-) ENGINE=InnoDB  DEFAULT CHARSET=utf8mb4;
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
 
 -- xchain.xchain_feedback
 CREATE TABLE `xchain_feedback` (
