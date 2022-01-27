@@ -87,3 +87,11 @@ CREATE TABLE `xchain_feedback_detail` (
   KEY `xchain_feedback_detail_created_by_IDX` (`created_by`) USING BTREE,
   KEY `xchain_feedback_detail_updated_by_IDX` (`updated_by`) USING BTREE
 ) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
+
+-- xchain.xchain_admin
+CREATE TABLE `xchain_admin` (
+  `xchain_admin_seq` bigint(20) NOT NULL AUTO_INCREMENT,
+  `address` varchar(100) NOT NULL,
+  PRIMARY KEY (`xchain_admin_seq`),
+  KEY `xchain_admin_address_IDX` (`address`) USING BTREE
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
