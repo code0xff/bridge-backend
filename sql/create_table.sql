@@ -94,4 +94,4 @@ CREATE TABLE `xchain_admin` (
   `address` varchar(100) NOT NULL,
   PRIMARY KEY (`xchain_admin_seq`),
   KEY `xchain_admin_address_IDX` (`address`) USING BTREE
-) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4
+) ENGINE=InnoDB DEFAULT CHARSET=utf8mb4;
